@@ -109,7 +109,7 @@ $(document).ready(function(){
 
     //setInterval(refresh, 6000);
 
-    //$("#container").on("click", "img", function() {
-    //    $(this).popImage();
-    //});
+    $("#container").on("click", "img", function() {
+        $(this).popImage();
+    });
 });

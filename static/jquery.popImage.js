@@ -45,9 +45,18 @@
 				st = $(window).scrollTop();
 				$('.popImage_close').hide();
 				e.preventDefault();
-				position = $$.offset(),
-				o_h = animate_image.height(),
-				o_w = animate_image.width();
+				position = $$.offset();
+				//o_h = animate_image.height(),
+				//o_w = animate_image.width();
+                if(animate_image.data('o_h')){
+                    o_h= animate_image.data('o_h');
+                    o_w= animate_image.data('o_w');
+                }else{
+                    o_h = animate_image.height(),
+                    o_w = animate_image.width();
+                    animate_image.data('o_h',o_h);
+                    animate_image.data('o_w',o_w);
+                }
 
 				var t = st + (w_h - o_h)/2,
 				l = (w_w - o_w)/2;
