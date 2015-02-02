@@ -11,7 +11,7 @@ from tornado.httpserver import HTTPServer
 from tornado.escape import json_encode
 
 
-redis = StrictRedis(db=15)
+redis = StrictRedis(db=15, password='srjdZ5weyil')
 
 
 class BaseHandler(RequestHandler):

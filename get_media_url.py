@@ -5,7 +5,7 @@ import logbook
 from redis import StrictRedis
 from twitter import Api
 
-redis = StrictRedis(db=15)
+redis = StrictRedis(db=15, password='srjdZ5weyil')
 
 api = Api(
     access_token_key='161182645-L4cMztxf6YgcmlBSriNdsjydExahQXLytSZW7Iv0',

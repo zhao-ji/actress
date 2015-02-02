@@ -8,7 +8,7 @@ from qiniu import Auth, put_data
 from redis import StrictRedis
 from requests import get
 
-redis = StrictRedis(db=15)
+redis = StrictRedis(db=15, password='srjdZ5weyil')
 
 ACCESS_KEY = "WSzjNxJFwZ2VuCo_L0BvSVTyNlX-aTonE-r_kn2R"
 SECRET_KEY = "qbcgCI500pJrsFzjDO13d9-8FbgqbgMqCnp9MdWd"
