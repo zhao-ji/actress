@@ -5,13 +5,15 @@ import logbook
 from redis import StrictRedis
 from twitter import Api
 
+from auth import access_token_key, access_token_secret
+from auth import consumer_key, consumer_secret
+
 redis = StrictRedis(db=15, password='srjdZ5weyil')
 
 api = Api(
-    access_token_key='161182645-L4cMztxf6YgcmlBSriNdsjydExahQXLytSZW7Iv0',
-    access_token_secret='cElYTDaPLExWmt5YFS9ocmFLMqy5zFCEtJuwlxCFh8UNg',
-    consumer_key='PNe5Qd1Q31HrMnshPoNxGKUSn',
-    consumer_secret='OZ081oxLHyQOrTHnsuSuHJJJ65sJw3mRAQbP3MAueOwZxfwVWE',)
+    access_token_key, access_token_secret,
+    consumer_key, consumer_secret,
+    )
 
 if __name__ == "__main__":
     for status in api.GetUserStream(withuser='followings'):
