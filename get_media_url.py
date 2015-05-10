@@ -7,8 +7,9 @@ from twitter import Api
 
 from auth import access_token_key, access_token_secret
 from auth import consumer_key, consumer_secret
+from auth import redis_db, redis_psw
 
-redis = StrictRedis(db=15, password='srjdZ5weyil')
+redis = StrictRedis(db=redis_db, password=redis_psw)
 
 api = Api(
     access_token_key, access_token_secret,
