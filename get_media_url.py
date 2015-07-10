@@ -12,11 +12,12 @@ from auth import redis_db, redis_psw
 redis = StrictRedis(db=redis_db, password=redis_psw)
 
 api = Api(
-    access_token_key, access_token_secret,
     consumer_key, consumer_secret,
+    access_token_key, access_token_secret,
     )
 
 if __name__ == "__main__":
+    
     for status in api.GetUserStream(withuser='followings'):
         if u'entities' in status and u'media' in status['entities']:
             media_list = status['entities']['media']
