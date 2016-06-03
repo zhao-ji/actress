@@ -17,11 +17,9 @@ api = Api(
 
 if __name__ == "__main__":
     for status in api.GetUserStream(withuser='followings'):
-        from pprint import pprint
         if u'entities' in status and u'media' in status['entities']:
-            pprint(status)
-            # media_list = status['entities']['media']
-            # media_url = map(lambda media: media['media_url'], media_list)
-            # for item in media_url:
-            #     redis.rpush("media_url", item)
-            #     logbook.info(item)
+            media_list = status['entities']['media']
+            media_url = map(lambda media: media['media_url'], media_list)
+            for item in media_url:
+                redis.rpush("media_url", item)
+                logbook.info(item)

@@ -11,7 +11,7 @@ from tornado.httpserver import HTTPServer
 from tornado.escape import json_encode
 
 
-redis = StrictRedis(db=15, password='srjdZ5weyil')
+redis = StrictRedis(db=15)
 
 
 class BaseHandler(RequestHandler):
@@ -84,7 +84,7 @@ class RecordByCookieHandler(BaseHandler):
 
 
 from tornado.options import define, options, parse_command_line
-define('port', default=7001, type=int)
+define('port', default=2222, type=int)
 define('debug', default=True, type=bool)
 
 handlers = [
@@ -103,7 +103,7 @@ if __name__ == '__main__':
         cookie_secret='helloworld',
         )
     http_server = HTTPServer(app, xheaders=True)
-    http_server.listen(options.port)
+    http_server.listen(options.port, address="127.0.0.1")
     logbook.info(
         "The server now is running on port {}".format(options.port)
         )

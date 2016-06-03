@@ -8,11 +8,12 @@ from qiniu import Auth, put_data
 from redis import StrictRedis
 from requests import get
 
-redis = StrictRedis(db=15, password='srjdZ5weyil')
+redis = StrictRedis(db=15)
 
 ACCESS_KEY = "WSzjNxJFwZ2VuCo_L0BvSVTyNlX-aTonE-r_kn2R"
 SECRET_KEY = "qbcgCI500pJrsFzjDO13d9-8FbgqbgMqCnp9MdWd"
 BUCKET_NAME = "elfin"
+Proxy = {"http": "http://127.0.0.1:48657"}
 
 qiniu = Auth(ACCESS_KEY, SECRET_KEY)
 
@@ -30,7 +31,7 @@ if __name__ == "__main__":
     while 1:
         media_url = redis.blpop("media_url")
         if media_url:
-            media = get(url=media_url[1])
+            media = get(url=media_url[1], proxies=Proxy)
             try:
                 ret, info = upload_media(media.content)
             except Exception, e:
