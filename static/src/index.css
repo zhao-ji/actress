@@ -25,9 +25,9 @@ code {
 #gallary {
   margin: 1rem;
   display: grid;
-  grid-auto-rows: 15rem;
+  grid-auto-rows: 3rem;
+  grid-gap: 0 0.5rem;
   grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-  grid-gap: 1rem;
 }
 
 .photo {

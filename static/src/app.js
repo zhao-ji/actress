@@ -2,10 +2,12 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 import { useImageList } from './hooks';
+import { Photo } from './components';
 
 function App() {
-  const [page, updatePage] = useState(1);
-  const [isLoading, images] = useImageList({ page });
+  const [anchor, updateAnchor] = useState(null);
+  const [isLoading, images] = useImageList({ anchor });
+  let lastKey = images && images.length > 0 && images[images.length - 1].Key;
   useEffect(() => {
       const scrollCheck = () => {
           const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
@@ -14,12 +16,17 @@ function App() {
           const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
           const windowBottom = windowHeight + window.pageYOffset;
           if (windowBottom >= docHeight) {
-              updatePage(page + 1);
+              console.log('touch the bottom--------------------')
+              updateAnchor(lastKey);
           }
       }
       window.addEventListener('scroll', scrollCheck);
-      return () => window.removeEventListener('scroll', scrollCheck);
-  }, [page, updatePage]);
+      console.log('111111111111111111111')
+      return () => {
+          console.log('==================')
+          window.removeEventListener('scroll', scrollCheck)
+      };
+  }, [lastKey, updateAnchor]);
   return (
     <div id="App">
       <header className="App-header">
@@ -29,18 +36,7 @@ function App() {
       </header>
       <div id="gallary">
           {
-              Object.keys(images).map(k => (
-                  <>
-                  {images[k].map(imageId => (
-                      <div className="photo" key={imageId}>
-                          <img
-                              src={`https://picsum.photos/id/${imageId}/160/240?blur`}
-                              alt="pic"
-                          />
-                      </div>
-                  ))}
-                  </>
-              ))
+              images.map(image => <Photo image={image} key={image.ETag} />)
           }
       </div>
       {

@@ -3,20 +3,20 @@ import {
     useEffect,
 } from 'react';
 
-export function useImageList({ page }) {
+export function useImageList({ anchor }) {
     const [isLoading, updateIsLoading] = useState(false);
-    const [images, updateImages] = useState({});
+    const [images, updateImages] = useState([]);
     useEffect(() => {
+        console.log(anchor, updateImages, updateIsLoading)
         updateIsLoading(true);
-        fetch(`https://picsum.photos/v2/list?page=${page}&limit=50`)
+        const param = anchor ? `&fromKey=${anchor}` : "";
+        fetch("https://api.article.minganci.org/actress/?limit=100" + param)
             .then(response => response.json())
             .then(data => {
-                updateImages({
+                updateImages([
                     ...images,
-                    ...{
-                        [page]: data.map(item => item.id)
-                    },
-                });
+                    ...data,
+                ]);
             })
             .catch(error => {
                 console.log(error);
@@ -24,6 +24,6 @@ export function useImageList({ page }) {
             .finally(() => {
                 updateIsLoading(false);
             })
-    }, [page, updateImages, updateIsLoading]);
+    }, [anchor, updateImages, updateIsLoading]);
     return [isLoading, images];
 }
