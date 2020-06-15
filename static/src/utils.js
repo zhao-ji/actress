@@ -1,4 +1,4 @@
-export const apiUrl = "https://api.article.minganci.org/actress/?limit=100";
+export const apiUrl = "https://actress.minganci.org/api/?limit=100";
 
 export function touchBottom() {
     const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;

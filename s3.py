@@ -8,9 +8,26 @@ from flask import Flask
 from flask import request
 
 import boto3
+import logbook
 
 app = Flask(__name__)
 s3 = boto3.client(service_name='s3', region_name='ap-southeast-2', use_ssl=True)
+
+
+def apply_logging():
+    from os.path import abspath, exists, dirname, join
+
+    server_log_file = join(dirname(abspath(__file__)), "record.log")
+    if not exists(server_log_file):
+        open(server_log_file, "w").close()
+
+    logbook.set_datetime_format("local")
+    local_log = logbook.FileHandler(server_log_file)
+    local_log.format_string = (
+        u'[{record.time:%Y-%m-%d %H:%M:%S}] '
+        u'lineno:{record.lineno} '
+        u'{record.level_name}:{record.message}')
+    local_log.push_application()
 
 
 @app.route("/", methods=['GET'])
@@ -50,4 +67,5 @@ def print_example():
 
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=8003)
+    apply_logging()
+    app.run(host='127.0.0.1', port=8002)
