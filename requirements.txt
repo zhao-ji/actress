@@ -4,7 +4,7 @@ certifi==2019.6.16
 chardet==3.0.4
 Click==7.0
 docutils==0.15.2
-Flask==0.11
+Flask==1.0
 futures==3.3.0
 gunicorn==19.9.0
 idna==2.8
