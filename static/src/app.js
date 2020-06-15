@@ -1,12 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-import { Photo } from './components';
+import { Photo, ImgModal } from './components';
 import { touchBottom, apiUrl } from './utils';
 
 function App() {
     const [isLoading, updateIsLoading] = useState(false);
     const [images, updateImages] = useState([]);
+    const [image, setImage] = useState(null);
     useEffect(() => {
         updateIsLoading(true);
         fetch(apiUrl)
@@ -40,21 +41,22 @@ function App() {
         };
     }, [images, updateImages, updateIsLoading]);
     return (
-      <div id="App">
-        <header className="App-header">
-            <p>
-                Life recording and photo gallery
-            </p>
-        </header>
-        <div id="gallary">
+        <div id="App">
+            <header className="App-header">
+                <p>
+                    Life recording and photo gallery
+                </p>
+            </header>
+            <ImgModal image={image} setImage={setImage} />
+            <div id="gallary">
+                {
+                    images.map(image => <Photo image={image} setImage={setImage} key={image.ETag} />)
+                }
+            </div>
             {
-                images.map(image => <Photo image={image} key={image.ETag} />)
+                isLoading && <p>Loading...</p>
             }
         </div>
-        {
-            isLoading && <p>Loading...</p>
-        }
-      </div>
     );
 }
 
