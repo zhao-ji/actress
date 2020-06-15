@@ -39,15 +39,20 @@ const customStyles = {
     right                 : 'auto',
     bottom                : 'auto',
     marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    transform             : 'translate(-50%, -50%)',
+    padding               : 0,
   }
 };
 
-export function ImgModal({ image, setImage }) {
-    function closeModal() {
-        setImage(null);
-    }
+export function ImgModal({
+    image,
+    closeModal,
+    clickPrevious,
+    clickDelete,
+    clickAfter,
+}) {
     if (!image) return false;
+    Modal.setAppElement('#root');
     return (
         <Modal
             isOpen={image && true}
@@ -60,14 +65,14 @@ export function ImgModal({ image, setImage }) {
                 alt="pic"
                 onClick={closeModal}
             />
-            <div>
-                <button>
+            <div className="btn-group">
+                <button onClick={clickPrevious}>
                     Previous
                 </button>
-                <button>
+                <button onClick={clickDelete}>
                     Delete
                 </button>
-                <button>
+                <button onClick={clickAfter}>
                     After
                 </button>
             </div>

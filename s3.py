@@ -54,6 +54,7 @@ def remove():
     if image:
         s3.delete_object(Bucket="actress-image", Key=image)
 
+    logbook.info("Delete {}".format(image))
     return dumps({})
 
 
