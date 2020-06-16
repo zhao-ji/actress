@@ -20,12 +20,12 @@ export function Photo({ image, setImage }) {
             gridRow: `span ${dimension}`
         }}>
             <img
-                style={{
-                    width: "10rem",
-                }}
                 src={`https://actress-image.s3-ap-southeast-2.amazonaws.com/${image.Key}`}
                 alt="pic"
                 onLoad={onLoad}
+                style={{
+                    width: "10rem",
+                }}
                 onClick={() => setImage(image)}
             />
         </div>
@@ -57,6 +57,8 @@ export function ImgModal({
         onSwipedRight: clickPrevious,
         onSwipedUp: clickDelete,
     });
+    const windowWidth = "innerHeight" in window ? window.innerWidth: document.documentElement.offsetWidth;
+    const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
 
     if (!image) return false;
     Modal.setAppElement('#root');
@@ -66,12 +68,19 @@ export function ImgModal({
             isOpen={image && true}
             onRequestClose={closeModal}
             style={customStyles}
-            contentLabel="Example Modal"
+            contentLabel="Photo Popup"
         >
             <img
                 src={`https://actress-image.s3-ap-southeast-2.amazonaws.com/${image.Key}`}
                 alt="pic"
                 onClick={closeModal}
+                style={{
+                    height: 'auto',
+                    width: 'auto',
+                    margin: '1 auto',
+                    maxWidth: windowWidth,
+                    maxHeight: windowHeight - 30,
+                }}
                 {...handlers}
             />
             <div className="btn-group">
