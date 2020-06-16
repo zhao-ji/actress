@@ -63,3 +63,7 @@ code {
   grid-column: span 1;
   grid-row: span 1;
 }
+
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}

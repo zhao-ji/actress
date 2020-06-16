@@ -7,5 +7,5 @@ export function touchBottom() {
     const html = document.documentElement;
     const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
     const windowBottom = windowHeight + window.pageYOffset;
-    return windowBottom >= docHeight;
+    return windowBottom + 1 >= docHeight;
 }

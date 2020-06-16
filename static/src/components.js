@@ -4,6 +4,7 @@ import {
 } from 'react';
 
 import Modal from 'react-modal';
+import { useSwipeable } from 'react-swipeable';
 
 
 export function Photo({ image, setImage }) {
@@ -51,8 +52,15 @@ export function ImgModal({
     clickDelete,
     clickAfter,
 }) {
+    const handlers = useSwipeable({
+        onSwipedLeft: clickAfter,
+        onSwipedRight: clickPrevious,
+        onSwipedUp: clickDelete,
+    });
+
     if (!image) return false;
     Modal.setAppElement('#root');
+
     return (
         <Modal
             isOpen={image && true}
@@ -64,6 +72,7 @@ export function ImgModal({
                 src={`https://actress-image.s3-ap-southeast-2.amazonaws.com/${image.Key}`}
                 alt="pic"
                 onClick={closeModal}
+                {...handlers}
             />
             <div className="btn-group">
                 <button onClick={clickPrevious}>
